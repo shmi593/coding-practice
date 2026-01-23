@@ -1,0 +1,38 @@
+[project]
+name = "coding-practice"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "more-itertools>=10.8.0",
+    "networkx>=3.6.1",
+    "numpy>=2.4.1",
+    "scipy>=1.17.0",
+    "sortedcontainers>=2.4.0",
+    "sympy>=1.14.0",
+]
+
+[dependency-groups]
+dev = [
+    "black>=26.1.0",
+    "mypy>=1.19.1",
+    "ruff>=0.14.14",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]
+
+[tool.black]
+target-version = ["py311"]
+line-length = 88
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
