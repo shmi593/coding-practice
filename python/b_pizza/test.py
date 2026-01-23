@@ -1,0 +1,26 @@
+import math
+
+d = int(input())
+n = int(input())
+m = int(input())
+# [0, d] is the location of main store
+stores = sorted([int(input()) for _ in range(n - 1)] + [0, d]) 
+receivers = [int(input()) for _ in range(m)]
+
+def calc_min_distance(arr, num):
+    l = 0
+    r = len(arr) - 1
+    m = r // 2
+    min_distance = abs(arr[m] - num)  
+    for _ in range(int(math.log2(len(arr))) + 1):
+        if num > arr[m]:
+            l = m + 1
+        else:
+            r = m - 1
+        m = (l + r) // 2
+        min_distance = min(min_distance, abs(arr[m] - num))
+    return min_distance    
+
+solve = lambda stores, receivers: sum([calc_min_distance(stores, receiver) for receiver in receivers])
+
+print(solve(stores, receivers))
