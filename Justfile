@@ -11,3 +11,6 @@ solve-py problem test_site="atcoder":
         exit 1
     fi
     uv run "${dir}/test.py" < "${dir}/input.txt"
+
+console-py:
+    uv run python
