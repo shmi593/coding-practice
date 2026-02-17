@@ -1,26 +1,20 @@
-import math
+# https://atcoder.jp/contests/joi2009ho/tasks/joi2009ho_b
+from bisect import bisect_right
+from sys import stdin
 
-d = int(input())
-n = int(input())
-m = int(input())
-# [0, d] is the location of main store
-stores = sorted([int(input()) for _ in range(n - 1)] + [0, d]) 
-receivers = [int(input()) for _ in range(m)]
 
-def calc_min_distance(arr, num):
-    l = 0
-    r = len(arr) - 1
-    m = r // 2
-    min_distance = abs(arr[m] - num)  
-    for _ in range(int(math.log2(len(arr))) + 1):
-        if num > arr[m]:
-            l = m + 1
-        else:
-            r = m - 1
-        m = (l + r) // 2
-        min_distance = min(min_distance, abs(arr[m] - num))
-    return min_distance    
+def solve(stores, destinations):
+    total = 0
+    for dest in destinations:
+        i = bisect_right(stores, dest)
+        total += min(abs(dest - stores[i - 1]), abs(dest - stores[i]))
+    return total
 
-solve = lambda stores, receivers: sum([calc_min_distance(stores, receiver) for receiver in receivers])
 
-print(solve(stores, receivers))
+d = int(stdin.readline())
+n = int(stdin.readline())
+m = int(stdin.readline())
+stores = sorted([0] + [int(stdin.readline()) for _ in range(n - 1)] + [d])
+destinations = [int(stdin.readline()) for _ in range(m)]
+
+print(solve(stores, destinations))
